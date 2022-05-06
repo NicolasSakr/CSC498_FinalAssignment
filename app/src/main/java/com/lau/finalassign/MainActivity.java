@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         list = (ListView) findViewById(R.id.clist);
-        web = (WebView) findViewById(R.id.web);
+        //web = (WebView) findViewById(R.id.web);
         cname = new ArrayList<>();
         clink = new ArrayList<>();
 
@@ -58,8 +58,12 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                web.setWebViewClient(new WebViewClient());
-                web.loadUrl(clink.get(i));
+                //same page
+                //web.setWebViewClient(new WebViewClient());
+                //web.loadUrl(clink.get(i));
+                Intent intent = new Intent(getApplicationContext(), pg2.class);
+                intent.putExtra("link", clink.get(i));
+                startActivity(intent);
             }
         });
     }
