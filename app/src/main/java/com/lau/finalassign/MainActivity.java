@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //accidentally made it in the same page but now fixed!
                 //same page
                 //web.setWebViewClient(new WebViewClient());
                 //web.loadUrl(clink.get(i));
