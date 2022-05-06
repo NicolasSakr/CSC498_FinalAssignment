@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
     WebView web;
+    ArrayList<String> cname, clink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         list = (ListView) findViewById(R.id.clist);
         web = (WebView) findViewById(R.id.web);
-        ArrayList<String> cname = new ArrayList<>();
-        ArrayList<String> clink = new ArrayList<>();
+        cname = new ArrayList<>();
+        clink = new ArrayList<>();
 
 
         try{
@@ -41,12 +43,10 @@ public class MainActivity extends AppCompatActivity {
             int c_link_Index = c.getColumnIndex("course_link");
             c.moveToFirst();
 
-            int x=0;
-            while(x<c.getCount()){
+            for (int x=0; x<c.getCount(); x++){
                 cname.add(c.getString(c_name_Index));
                 clink.add(c.getString(c_link_Index));
                 c.moveToNext();
-                x+=1;
             }
             ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, cname);
             list.setAdapter(adapter);
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                web.setWebViewClient(new WebViewClient());
                 web.loadUrl(clink.get(i));
             }
         });
